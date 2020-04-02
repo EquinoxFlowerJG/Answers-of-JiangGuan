@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>珠峰培训</title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="box">
+			<ul class="list">
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+			</ul>
+			<div class="info">
+				<span>商品共合计：<em>0</em>件</span>
+				<span>共花费了：<em>0</em>元</span>
+				<br />
+				<br />
+				<span>其中最贵的商品单价是：<em>0</em>元</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		let list = document.querySelector('.list'); // ul列表
+		let lis = list.querySelectorAll('li'); // 所有的li标签
+		let singleNum = list.querySelectorAll('em'); // 所有的em（单个商品数量）
+		let spans = list.querySelectorAll('span'); // 所有的span标签
+		let info = document.querySelector('.info'); // 底部信息栏
+		let totalNum = info.querySelectorAll('span')[0].children[0]; // 商品共合计
+		let totalPrice = info.querySelectorAll('span')[1].children[0]; // 总花费
+		let highPrice = info.querySelectorAll('span')[2].children[0]; // 最贵商品单价
+
+		let ary = [];
+
+		for (let i = 0; i < singleNum.length; i++) {
+			singleNum.index = i;
+			let minus = singleNum[i].previousElementSibling; // 减号
+			let plus = singleNum[i].nextElementSibling; // 加号
+
+			let unitPrice = spans[i].children[0]; // 单价
+			let subtotal = spans[i].children[1]; // 小计
+
+			// 每点击一次加号，该商品数量+1，小计加一次单价；总计+1，总花费加一次该商品单价。减号同理，小于0时无操作。
+
+			plus.onclick = function () {
+				singleNum[i].innerText = parseInt(singleNum[i].innerText) + 1;
+				subtotal.innerHTML = parseFloat(subtotal.innerHTML) + parseFloat(unitPrice.innerHTML) + '元';
+				totalNum.innerHTML = parseInt(totalNum.innerText) + 1;
+				totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) + parseFloat(unitPrice.innerHTML);
+				
+
+			};
+			minus.onclick = function () {
+				if (singleNum[i].innerText > 0) {
+					singleNum[i].innerText = parseInt(singleNum[i].innerText) - 1;
+					subtotal.innerHTML = parseFloat(subtotal.innerHTML) - parseFloat(unitPrice.innerHTML) + '元';
+					totalNum.innerHTML = parseInt(totalNum.innerText) - 1;
+					totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) - parseFloat(unitPrice.innerHTML);
+				}
+			};
+
+		}
+
+
+		console.log(singleNum, totalPrice, totalNum);
+	</script>
+</body>
+
+</html>

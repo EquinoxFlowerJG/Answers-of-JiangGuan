@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>珠峰培训</title>
+	<style type="text/css">
+		body {
+			font-size: 14px;
+			font-family: "Lantinghei SC Extralight", Arial;
+		}
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		img {
+			vertical-align: top;
+		}
+
+		#wrap {
+			width: 760px;
+			height: 260px;
+			margin: 100px auto;
+			padding: 145px 120px 95px;
+			background: url(img/bg.jpg) no-repeat 0 0;
+		}
+
+		#section {
+			width: 760px;
+			height: 260px;
+			-moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+		}
+
+		#choose {
+			width: 760px;
+			height: 50px;
+			margin: 0 auto;
+			background: url(img/nav_bg.png) no-repeat 0 0;
+			line-height: 50px;
+			text-indent: 21px;
+		}
+
+		#type {
+			width: 100%;
+			height: 210px;
+			background: url(img/type_bg.png) no-repeat 0 0;
+			padding: 17px 0 16px 28px;
+		}
+
+		#type li {
+			height: 44px;
+			color: #8a8a8a;
+			line-height: 44px;
+		}
+
+		#type a {
+			margin: 0 12px 0 11px;
+			color: #000;
+		}
+
+		#choose mark {
+			position: relative;
+			display: inline-block;
+			height: 24px;
+			line-height: 24px;
+			border: 1px solid #28a5c4;
+			color: #28a5c4;
+			margin: 12px 5px 0;
+			background: none;
+			padding: 0 30px 0 6px;
+			text-indent: 0;
+		}
+
+		#choose mark a {
+			position: absolute;
+			top: 3px;
+			right: 2px;
+			display: inline-block;
+			width: 18px;
+			height: 18px;
+			background: #28a5c4;
+			color: #fff;
+			line-height: 18px;
+			font-size: 16px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="wrap">
+		<section id="section">
+			<nav id="choose">
+				你的选择:
+			</nav>
+			<ul id="type">
+				<li>
+					品牌：
+					<a href="javascript:;">苹果</a>
+					<a href="javascript:;">小米</a>
+					<a href="javascript:;">锤子</a>
+					<a href="javascript:;">魅族</a>
+					<a href="javascript:;">华为</a>
+					<a href="javascript:;">三星</a>
+					<a href="javascript:;">OPPO</a>
+					<a href="javascript:;">vivo</a>
+					<a href="javascript:;">乐视</a>
+					<a href="javascript:;">360</a>
+					<a href="javascript:;">中兴</a>
+					<a href="javascript:;">索尼</a>
+				</li>
+				<li>
+					尺寸：
+					<a href="javascript:;">3.0英寸以下</a>
+					<a href="javascript:;">3.0-3.9英寸</a>
+					<a href="javascript:;">4.0-4.5英寸</a>
+					<a href="javascript:;">4.6-4.9英寸</a>
+					<a href="javascript:;">5.0-5.5英寸</a>
+					<a href="javascript:;">6.0英寸以上</a>
+				</li>
+				<li>
+					系统：
+					<a href="javascript:;">安卓 ( Android )</a>
+					<a href="javascript:;">苹果 ( IOS )</a>
+					<a href="javascript:;">微软 ( WindowsPhone )</a>
+					<a href="javascript:;">无</a>
+					<a href="javascript:;">其他</a>
+				</li>
+				<li>
+					网络：
+					<a href="javascript:;">联通3G</a>
+					<a href="javascript:;">双卡单4G</a>
+					<a href="javascript:;">双卡双4G</a>
+					<a href="javascript:;">联通4G</a>
+					<a href="javascript:;">电信4G</a>
+					<a href="javascript:;">移动4G</a>
+				</li>
+			</ul>
+			
+			<script type="text/javascript">
+				// 获取需要的元素
+				let choose = document.querySelector('#choose'),
+					lis = document.querySelectorAll('#type li'),
+					buttons = document.querySelectorAll('#type li a');
+
+				// 给每个li添加一个自定义属性，用来记录当前li在所有li中的位置
+				for (let i = 0; i < lis.length; i++) {
+					lis[i].index = i;
+				}
+
+				// 定义一个空数组，循环每个a元素绑定点击事件，点击时，判断其父元素li的位置，并把需要添加的内容添加到对应位置的ary中，同时修改css样式
+				let ary = [];
+				for (let i = 0; i < buttons.length; i++) {
+					buttons[i].onclick = function () {
+						let siblings = this.parentNode.children;
+						let identify = this.parentNode.index;
+						
+
+						// 点击时，给点击的加样式，同级元素去掉样式
+						for (let j = 0; j < siblings.length; j++) {
+							siblings[j].style.color = '#000';
+						}
+						this.style.color = '#28a5c4';
+
+						// 创建mark元素和a元素，并把a元素放入mark中，同时为a元素绑定点击事件
+						let that = this;
+						let mark = document.createElement('mark');
+						let close = document.createElement('a')
+						close.href = 'javascript:;'
+						close.innerHTML = 'x';
+						mark.innerHTML = this.innerHTML;
+						close.onclick = function () {
+							this.parentNode.parentNode.removeChild(this.parentNode);
+							that.style.color = '';
+						}
+						mark.appendChild(close);
+						
+
+						// 确定每个mark的位置，并在choose中渲染数据
+						ary[identify] = mark;
+						choose.innerHTML = '你的选择:'; // 每次添加之前先清空上次添加的
+						for (let k = 0; k < ary.length; k++) {
+							choose.appendChild(ary[k]);
+						}
+
+					}
+
+				}
+
+
+			</script>
+		</section>
+	</div>
+</body>
+
+</html>
