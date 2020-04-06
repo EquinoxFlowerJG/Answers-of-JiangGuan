@@ -1,0 +1,32 @@
+.container{
+    padding: 0;
+    max-width: 900px;
+}
+.collapse{
+    flex-basis: auto;
+}
+.navbar-nav{
+    flex-direction: row;
+}
+.navbar-nav .nav-item{
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+.productBox{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.productBox .card{
+    width: 19.2%;
+    margin-right: 1%;
+    margin-bottom: 10px;
+}
+.productBox .card:nth-child(5n){
+    margin-right: 0;
+}
+.productBox .card .card-title{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
