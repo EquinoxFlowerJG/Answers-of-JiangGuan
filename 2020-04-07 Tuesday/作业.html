@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2020-04-07-作业</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        // 1. 结合正则和execAll的思想,实现queryParams方法
+        var str = 'https://baicu.com?abc=123&zf=666&px=888&_=t';
+
+        function queryParams(str) {
+            let reg = /([^?&=]+)=([^?&=]+)/g;
+            let ary = [];
+            let res = reg.exec(str);
+            let obj = {};
+            while (res) {
+                ary.push(res);
+                res = reg.exec(str);
+            }
+            ary.forEach(item => {
+                obj[item[1]] = item[2];
+            })
+
+            return obj;
+        }
+        queryParams(str);
+        console.log(queryParams(str)); // {abc: "123", zf: "666", px: "888", _: "t"}
+
+
+        // 2. 获取一个字符串中出现次数最多的字符,及其次数。
+        var str = 'ertefvzdgfergsegfsdrgrgfbshtrh';
+
+        // 先将字符串转数组并去重
+        let ary = [...new Set(str)];
+        // 遍历数组形成一个包含字符和其出现次数的新对象
+        let letter = [];
+        let times = [];
+
+        ary.forEach(item => {
+            let reg = new RegExp(item, 'g');
+            let repeat = str.match(reg);
+            letter.push(repeat[0]);
+            times.push(repeat.length);
+
+        })
+        let max = Math.max(...times);
+        let indexs = [];
+        index = times.forEach((item, index) => {
+            if (item === 5) {
+                indexs.push(index);
+            }
+        })
+        let maxStr = '';
+        for (let i = 0; i < indexs.length; i++) {
+            maxStr += letter[indexs[i]];
+        }
+        let resStr = maxStr.split('').join('和');
+
+        console.log(`字符串中出现次数最多的字符是${resStr},出现的次数为${max}次`);
+
+
+        // 3. 实现一个千分符的函数
+        // ‘124252343’  ‘124,252,343’
+        let num = '1242523431';
+
+        // function kilo() {
+        //     num = String(num);
+        //     if (num.length % 3 === 0) {
+        //         let reg = /(\d{3})/g;
+        //         num = num.match(reg).join(',');
+        //     };
+        //     if (num.length % 3 === 1) {
+        //         let reg = /(\d)(\d{3})+$/g;
+        //         console.log(num.match(reg));
+        //         // num = num.match(reg).join(',');
+                
+        //     }
+
+        // };
+        // kilo(num);
+
+        // 不会
+
+        // 4. 结合replace实现 queryParams
+        var url = 'https://baicu.com?abc=123&zf=666&px=888&_=t';
+
+        function queryParams1(url) {
+            let str = url.split('?')[1]
+            let reg1 = /&/g;
+            let reg2 = /=/g;
+            str = str.replace(reg1,',').replace(reg2,':');
+
+            return str;
+        }
+        queryParams1(url);
+        console.log(queryParams1(url));
+    </script>
+</body>
+
+</html>
