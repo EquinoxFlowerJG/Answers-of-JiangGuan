@@ -34,7 +34,7 @@ body {
 .container .column .card a .lazyImageBox img {
   width: 100%;
   opacity: 0;
-  transition: opacity 3s ease;
+  transition: opacity 0.3s ease;
 }
 .container .column .card a p {
   margin-top: 5px;
