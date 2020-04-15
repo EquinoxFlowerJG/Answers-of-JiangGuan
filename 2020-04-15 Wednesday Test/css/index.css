@@ -20,19 +20,21 @@ body {
   box-sizing: border-box;
   background: #fff;
   box-shadow: 3px 3px 10px #222;
+  overflow: hidden;
 }
 .container .column .card a {
   display: block;
   color: #000;
 }
 .container .column .card a .lazyImageBox {
-  background: url('../images/default.gif') no-repeat center center #f4f4ff;
+  width: 230px;
+  background: url('../images/default.gif') no-repeat center center;
   overflow: hidden;
 }
 .container .column .card a .lazyImageBox img {
   width: 100%;
   opacity: 0;
-  animation: opacity .3s ease;
+  transition: opacity 3s ease;
 }
 .container .column .card a p {
   margin-top: 5px;
